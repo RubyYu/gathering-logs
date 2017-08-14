@@ -6,7 +6,7 @@ const config = require('../log-config')
 const fs = require('fs')
 const LogStream = require('./log_stream')
 const projectName = process.env.PROJECT || 'test'
-const OUT_PATH = '/Users/wuwenyu/test_log/out/'
+const OUT_PATH = config.OUT_PATH
 const interval = 2000
 
 const stream_map = {}
@@ -35,7 +35,7 @@ function launch () {
 }
 
 function get_newest_file () {
-  let _config = config[projectName]
+  let _config = config.project[projectName]
   let _fileClassify = {}
   for (let dir of _config) {
     let fileList = fs.readdirSync(dir.path)
