@@ -14,6 +14,9 @@ function LogStream (from, to) {
 
 LogStream.prototype.start = function () {
   let superThis = this
+  if (!fs.existsSync(superThis.to)) {
+    fs.writeFileSync(superThis.to, '')
+  }
   const p = child_process.spawn('tail', ['-f', this.from], {'stdio': [0, 'pipe', 0]})
   p.stdout.on('data', data => {
     if (~~(fs.statSync(superThis.to).size) >= MAX_SIZE) {
