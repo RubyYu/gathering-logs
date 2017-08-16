@@ -55,7 +55,7 @@ function get_newest_file () {
   for (let dir of _config) {
     let fileList = fs.readdirSync(dir.path)
     if (!dir.path.endsWith('/')) {
-      throw new Error('Log path must be end of "/" !')
+      dir.path += '/'
     }
     let newest = {}
     for (let fileName of fileList) {
