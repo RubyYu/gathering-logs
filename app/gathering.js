@@ -5,7 +5,7 @@
 const config = require('../log-config')
 const fs = require('fs')
 const LogStream = require('./log_stream')
-const projectName = process.env.PROJECT || 'test'
+const projectName = process.env.PROJECT || 'default_project'
 const OUT_PATH = config.OUT_PATH
 const interval = 2000
 
