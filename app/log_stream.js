@@ -4,7 +4,7 @@ const readline = require('readline')
 const logConfig = require('../log-config')
 const child_process = require('child_process')
 
-const MAX_SIZE = logConfig.DEFAULT_MAX_SIZE
+const MAX_SIZE = logConfig.default_max_size
 
 function LogStream (from, to) {
   this.from = from

@@ -3,15 +3,19 @@
  */
 
 const config = require('../log-config')
+const logio_gen = require('../log.io/logio_conf_generator')
+const logio_harvester = require('../log.io/log.io-harvester')
 const fs = require('fs')
 const LogStream = require('./log_stream')
 const projectName = process.env.PROJECT || 'default_project'
-const OUT_PATH = config.OUT_PATH
+const OUT_PATH = config.outPath
 const interval = 2000
 
 const stream_map = {}
 
 function launch () {
+  let flag = true
+  let file_arr = [] // 用于log.io的配置
   setInterval(() => {
     let list = get_newest_file()
     for (let c in list) {
@@ -29,7 +33,18 @@ function launch () {
             stream: new LogStream(list[c][f].path, outFilePath)
           }
         }
+        if (flag) {
+          file_arr.push({
+            name: `${c}_${f}`,
+            path: outFilePath
+          })
+        }
       }
+    }
+    if (flag) {
+      let _logioConf =logio_gen.createLogConf(file_arr)
+      logio_harvester.run(_logioConf)
+      flag = false
     }
   }, interval)
 }
