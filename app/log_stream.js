@@ -17,13 +17,17 @@ LogStream.prototype.start = function () {
   if (!fs.existsSync(superThis.to)) {
     fs.writeFileSync(superThis.to, '')
   }
-  const p = child_process.spawn('tail', ['-f', this.from], {'stdio': [0, 'pipe', 0]})
-  p.stdout.on('data', data => {
+  superThis.p = child_process.spawn('tail', ['-f', this.from], {'stdio': [0, 'pipe', 0]})
+  superThis.p.stdout.on('data', data => {
     if (~~(fs.statSync(superThis.to).size) >= MAX_SIZE) {
       fs.writeFileSync(superThis.to, '')
     }
     fs.appendFileSync(superThis.to, data)
   })
+}
+
+LogStream.prototype.stop = function () {
+  this.p.stdout.removeAllListeners();
 }
 
 module.exports = LogStream
