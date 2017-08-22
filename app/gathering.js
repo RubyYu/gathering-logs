@@ -27,7 +27,7 @@ function launch () {
         if (!list[c].hasOwnProperty(f)) continue
         let outFilePath = `${OUT_PATH}${c}/${f}.log`
         if (!stream_map[outFilePath] || stream_map[outFilePath]['path'] !== list[c][f].path){
-          if (stream_map[outFilePath].stop) {
+          if (stream_map[outFilePath] && stream_map[outFilePath].stop) {
             // 停止监听
             stream_map[outFilePath].stop();
           }
