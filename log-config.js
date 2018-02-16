@@ -1,16 +1,6 @@
 module.exports = {
   project: {
     default_project: [
-      // {
-      //   name: 'connector',
-      //   path: '/data/logs/hermes-connector-v3s/',
-      //   fileName: /^(\w+)\./
-      // },
-      // {
-      //   name: 'connector-pm2',
-      //   path: '/data/logs/pm2/Hermes-Connector-V3s/',
-      //   fileName: /^(\w+)\.log$/
-      // }
       {
         name: 'test',
         path: '/Users/wuwenyu/test_log/',
